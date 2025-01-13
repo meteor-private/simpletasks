@@ -1,5 +1,8 @@
 # Charm - Simple Tasks
-Built with my new preferred stack: CHARM (Chakra-UI, React, Meteor).
+Running with **Meteor.js 3.0** and Node 20.
+Built with the CHARM (Chakra-UI, React, Meteor) stack.
+
+Deployed to Galaxy: https://simpletasks.meteorapp.com/
 
 ## What and why this stack?
 The main goal is to make development as quick and efficient as possible. To achieve this, I have selected these technologies:
@@ -9,12 +12,10 @@ The main goal is to make development as quick and efficient as possible. To achi
 -   [Chakra UI ](https://chakra-ui.com/)- A React library focused on simplicity and productivity.
 -   [React Hook Form ](https://react-hook-form.com/)- Performant, flexible, and extensible forms with easy-to-use validation.
 -   [MongoDB ](https://www.mongodb.com/)- A NoSQL database that is really powerful for prototyping and creating ready-to-use apps out of the box.
--   [Meteor Cloud ](https://meteor.com/cloud)-  A cloud provider that makes deploying a server with a database included painless.
-
-Demo: https://simpletasks.meteorapp.com/
+-   [Galaxy ](https://meteor.com/cloud)-  A cloud provider that makes deploying a server with a database included painless.
 
 ### Features:
-- Sign In / Sign Up
+- Sign In / Sign Up with Username and GitHub
 - List Tasks by logged-in user
 - Add Tasks
 - Remove Tasks
@@ -32,6 +33,11 @@ https://www.loom.com/share/50b9e1a513904b138fb772a332facbfb
 meteor npm install
 ```
 
+### Configure GitHub Login (Optional)
+
+Create an OAuth App on [GitHub](https://github.com/settings/developers) by following this [tutorial](https://blog.meteor.com/meteor-social-login-with-github-1b48d04c332) and checking our [docs](https://v3-docs.meteor.com/api/accounts.html#Meteor-loginWith%3CExternalService%3E).
+Then, replace the GitHub `clientId` and `secret` in your `private/settings.json` file with your own.
+
 ### Running
 
 ```bash
@@ -47,7 +53,7 @@ meteor npm run test
 ### Cleaning up your local DB
 
 ```bash
-meteor reset
+meteor reset --db
 ```
 
 ### Deploy to Galaxy with free MongoDB
@@ -55,24 +61,13 @@ meteor reset
 meteor deploy <select a subdomain>.meteorapp.com --free --mongo
 ```
 
-## Done
-- Integrate to Chakra-UI
-- Use ESLint, Prettier, and Husky
-- Host in Galaxy
-- Meteor APM monitoring
-- Use React Router 6 and Lazy Loading
-- Use React Hook Form and Zod for validation
-- Galaxy SEO Support
-- Define directory structure
-- Add database migrations
-- Integration tests for methods and publications
-
 ## Main Meteor packages
 - react-meteor-data
-- percolate:migrations
+- accounts-password
+- accounts-github
+- quave:migrations
 - force-ssl
-- mdg:seo
-- aldeed:collection2
+- jam:easy-schema
 - meteortesting:mocha
 
 ## Tech Explanation
@@ -128,9 +123,9 @@ For more details, you can check [the package docs](https://github.com/percolates
 
 Schemas are a way to ensure that the data coming from the front is as expected and sanitized.
 
-We have decided to use `simpl-schema`, attaching it to our collection as you can see in `api/tasks/tasks.collection.js`. By doing this, all data that goes into our Database is validated and follows the structure we defined. You can see how a Task is structured, and having that schema, we can start implementing methods and publications.
+We have decided to use `jam:easy-schema`, attaching it to our collection as you can see in `api/tasks/tasks.collection.js`. By doing this, all data that goes into our Database is validated and follows the structure we defined. You can see how a Task is structured, and having that schema, we can start implementing methods and publications.
 
-Don't forget to check [simpl-schema docs](https://www.npmjs.com/package/simpl-schema) in case of doubts about how to use it.
+Don't forget to check [jam:easy-schema docs](https://github.com/jamauro/easy-schema) in case of doubts about how to use it.
 
 #### Server Connection
 

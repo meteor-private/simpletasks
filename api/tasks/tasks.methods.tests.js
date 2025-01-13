@@ -1,7 +1,7 @@
+import { assert, expect } from 'chai';
 import { Meteor } from 'meteor/meteor';
 import { Random } from 'meteor/random';
 import { Tasks } from '/api/tasks/tasks';
-import { assert, expect } from 'chai';
 import '/api/tasks/tasks.methods';
 import { mockLoggedUserId } from '../../tests/helpers';
 
@@ -13,12 +13,16 @@ if (Meteor.isServer) {
 
       beforeEach(async () => {
         mockLoggedUserId(userId);
-        await Tasks.removeAsync({});
+        await Tasks.removeAsync({}).catch((error) => {
+          console.error(error);
+        });
         taskId = await Tasks.insertAsync({
           description: 'Test Task',
           done: false,
           createdAt: new Date(),
           userId,
+        }).catch((error) => {
+          console.error(error);
         });
       });
 

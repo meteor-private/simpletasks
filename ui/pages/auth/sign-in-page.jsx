@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   Box,
   Button,
@@ -13,12 +12,13 @@ import {
   Text,
   useColorModeValue,
 } from '@chakra-ui/react';
+import { FaGithub } from '@react-icons/all-files/fa/FaGithub';
 import { useUserId } from 'meteor/react-meteor-accounts';
-import { useLogin } from './hooks/use-login';
+import React from 'react';
 import { Navigate } from 'react-router-dom';
 import { routes } from '../../routes';
+import { useLogin } from './hooks/use-login';
 
-/* eslint-disable import/no-default-export */
 export default function SignInPage() {
   const userId = useUserId();
   const {
@@ -30,6 +30,7 @@ export default function SignInPage() {
     register,
     formState: { errors, isSubmitting },
     handleSubmit,
+    handleGithubLogin,
   } = useLogin();
 
   if (userId) {
@@ -134,6 +135,11 @@ export default function SignInPage() {
                   </Stack>
                 </>
               )}
+              <Stack spacing={10}>
+                <Button onClick={handleGithubLogin} rightIcon={<FaGithub />} ri>
+                  Continue with Github
+                </Button>
+              </Stack>
             </Stack>
           </form>
         </Box>

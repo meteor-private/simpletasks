@@ -1,6 +1,6 @@
-import { useState } from 'react';
 import { useUserId } from 'meteor/react-meteor-accounts';
 import { useFind, useSubscribe } from 'meteor/react-meteor-data/suspense';
+import { useState } from 'react';
 import { Tasks } from '/api/tasks/tasks';
 
 export function useTasks() {
@@ -11,7 +11,7 @@ export function useTasks() {
 
   const tasks = useFind(
     Tasks,
-    [filter, { sort: { createdAt: -1 } }],
+    [filter, { sort: { createdAt: -1, description: -1 } }],
     [hideDone]
   );
   const count = useFind(Tasks, [{ userId }]).length;
