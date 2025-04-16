@@ -41,7 +41,9 @@
       "client": "ui/main.jsx",
       "server": "api/main.js"
     },
-    "testModule": "tests/main.js"
+    "testModule": "tests/main.js",
+    "modernTranspiler": true,
+    "modernWebArchsOnly": true
   },
   "husky": {
     "hooks": {
